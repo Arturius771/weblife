@@ -25,10 +25,6 @@ create = (number, color) => {
   return group;
 };
 
-yellow = create(500, "yellow");
-
-red = create(500, "red");
-
 rule = (particles1, particles2, g) => {
   for (let i = 0; i < particles1.length; i++) {
     fx = 0;
@@ -41,7 +37,7 @@ rule = (particles1, particles2, g) => {
 
       d = Math.sqrt(dx * dx + dy * dy); //pythagorean rule
 
-      if (d > 0 && d < 80) {
+      if (d > 0 && d < 160) {
         F = (g * 1) / d;
         fx += F * dx;
         fy += F * dy;
@@ -60,9 +56,18 @@ rule = (particles1, particles2, g) => {
   }
 };
 
+yellow = create(400, "yellow");
+red = create(400, "red");
+green = create(400, "green");
+
 update = () => {
-  rule(yellow, yellow, -1);
-  rule(red, yellow, 1);
+  rule(green, green, -0.32);
+  rule(green, red, -0.017);
+  rule(green, yellow, 0.34);
+  rule(red, red, -0.1);
+  rule(red, green, -0.34);
+  rule(yellow, yellow, 0.15);
+  rule(yellow, green, -0.2);
   m.clearRect(0, 0, 1000, 1000);
   draw(0, 0, "black", 1000);
   for (i = 0; i < particles.length; i++) {
